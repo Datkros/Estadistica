@@ -2,7 +2,7 @@ import math
 from tabulate import tabulate
 
 
-class Statistics():
+class Statistics:
     def __init__(self):
         self.lst = []
         self.product = 0
@@ -18,7 +18,10 @@ class Statistics():
         self.simpleAbsFrequency = []
         self.absFrequencyCumulative = []
 
-    def asks_numbers(self):  # Asks for every value in the data distribution
+    def asks_numbers(self): 
+        """
+            Asks for every number in the data distribution
+        """
         count = 0
         try:
             quantityData = int(raw_input("Input the quantity of data in the distribution: "))
@@ -34,25 +37,36 @@ class Statistics():
         self.lst.sort()
         return self.lst
 
-    def sum_numbers(self):  # Calculates the sum of the numbers
+    def sum_numbers(self):
+        """
+            Calculates the sum of the numbers
+        """
         self.product = 0
         for value in self.lst:
             self.product += value
-        return self.product
 
-    def pow_numbers(self):  # Calculates the sum of the quadratic power of every value
+    def pow_numbers(self): 
+        """
+            Calculates the sum of the quadratic power of every value
+        """
         temp = 0
         for i in self.lst:
             temp += (i - self.arithmeticMean) ** 2
 
-    def class_amplitude(self):  # Calculates the class intervals.
+    def class_amplitude(self):
+        """
+            Calculates the class intervals.
+        """
         self.highestValue = max(self.lst)
         smallestValue = min(self.lst)
         ATR = self.highestValue - smallestValue + 1
         self.intervals = ATR / round((1 + 3.322 * math.log10(len(self.lst))))
         self.intervals = int(round(self.intervals))
 
-    def class_intervals(self):  # Generates the class intervals and puts them in a list.
+    def class_intervals(self):
+        """
+            Generates the class intervals and puts them in a list.
+        """
         x = 0
         for number in self.lst:  # Goes through every value and asigns the upper and lower limits for every class
             while x < 1:  # Asigns the first lowerLimit
@@ -64,12 +78,18 @@ class Statistics():
             if upperLimit >= self.highestValue:  # Stops the loop once it reached or went over the highestValue
                 break
 
-    def class_marks(self):  # Creates a list and stores the class marks for every class interval.
+    def class_marks(self):
+        """
+            Creates a list and stores the class marks for every class interval.
+        """
         for x, y in self.intervalsList:
             z = (x + y) / 2.0
             self.classMarks.append(z)
 
-    def absolute_frequency(self):  # Creates two lists, one with the calculated simple absolute frequency and other with its cumulative value
+    def absolute_frequency(self):
+        """
+            Creates two lists, one with the calculated simple absolute frequency and other with its cumulative value
+        """
         position = 0
         simpleCount = 0
         for x, y in self.intervalsList:  # Goes through every class interval
@@ -88,7 +108,10 @@ class Statistics():
                 self.absFrequencyCumulative.append(self.simpleAbsFrequency[position])
         print self.intervalsList, self.simpleAbsFrequency
 
-    def relative_frequency(self):  # Calculates the relative frequency, the cumulative relative frequency and the porcentual form.
+    def relative_frequency(self):
+        """
+            Calculates the relative frequency, the cumulative relative frequency and the porcentual form.
+        """
         relativeSum = 0
         position = 0
         for i in self.simpleAbsFrequency:
@@ -115,7 +138,10 @@ class Statistics():
             except:
                 self.porcentualRelFrequencyAcum.append(self.porcentualRelFrequency[position])
 
-    def geometric_mean(self):  # Calcutes the geometric mean and the mode.
+    def geometric_mean(self): 
+        """
+            Calcutes the geometric mean and the mode.
+        """
         geometricSum = 0
         position = 0
         geometricMean = 0
@@ -130,7 +156,10 @@ class Statistics():
         print "The geometric mean is:", geometricMean
         print "The mode is: ", mode
 
-    def median(self):  # Calculates the median of the distribution
+    def median(self):
+        """
+            Calculates the median of the distribution
+        """
         position = 0
         temp = len(self.lst) / 2.0
         lowerLimit = 0
@@ -148,7 +177,10 @@ class Statistics():
             self.medianD = lowerLimit + ((((len(self.lst) / 2) - 0) / float(self.simpleAbsFrequency[position])) * self.intervals)
         print "La median is ", round(self.medianD, 2)
 
-    def measure_of_position(self):  # Calculates the measures of position
+    def measure_of_position(self):
+        """
+            Calculates the measures of position
+        """
         output = ""
         line = ""
         respuestaBool = raw_input("Do you want to calculate any measure of position? Yes/No: ")
@@ -243,7 +275,10 @@ class Statistics():
             respuestaBool = raw_input("Do you want to calculate anything else? Yes/No: ")
         print output
 
-    def measures_of_dispersion(self):  # Calculates the measures of dispersion
+    def measures_of_dispersion(self):
+        """
+            Calculates the measures of dispersion
+        """
         position = 0
         A = 1
         while A < 4:
